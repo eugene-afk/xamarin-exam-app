@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  
+  <style name="MainTheme" parent="MainTheme.Base">
+    <!--<item name="android:windowIsTranslucent">true</item>-->
+    <!--<item name="android:windowBackground">#f7f7f7</item>-->
+    <!--<item name="android:background">@color/mtrl_btn_transparent_bg_color</item>-->
+    <item name="colorPrimary">#DF3A47</item>
+    <item name="colorPrimaryDark">#DF3A47</item>
+    <item name="colorAccent">#222</item>
+  </style>
+</resources>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ExamApp.View.Controls"
+             x:Class="ExamApp.View.ModifyExamPage"
+             Title="{Binding pageTitle}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{Binding examPubState}"
+                 Order="Primary"
+                 Priority="0" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+
+            <Label Text="Exam name" />
+            <Editor FontSize="Large" Text="{Binding editableText}" AutoSize="TextChanges" />
+
+            <StackLayout Orientation="Horizontal">
+                <Button Style="{StaticResource buttonStyle}" BackgroundColor="{StaticResource primaryColor}" Text="Save" Command="{Binding ModifyExamCommand}" CommandParameter="{Binding}" />
+                <Button Style="{StaticResource buttonStyle}" BackgroundColor="{StaticResource primaryColor}" Text="Add Questions" Command="{Binding OpenQuestionViewCommand}" CommandParameter="{Binding}" />
+            </StackLayout>
+
+            <ListView x:Name="QuestionsList"
+                          HasUnevenRows="True"
+                          ItemsSource="{Binding questions}"
+                          IsGroupingEnabled="False"
+                          IsPullToRefreshEnabled="False"
+                          SeparatorVisibility="None"
+                          controls:Sorting.IsSortable="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <ViewCell>
+                            <ContentView>
+                                <Grid Margin="6" BackgroundColor="White">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image WidthRequest="50" Margin="6" Aspect="AspectFit" HorizontalOptions="Start"
+	                        Source="question.png" />
+                                    <StackLayout Grid.Column="1" VerticalOptions="Center" Orientation="Horizontal">
+                                        <Label Text="{Binding nameView}" FontSize="Large" FontAttributes="Bold" VerticalOptions="Center" />
+                                        <ImageButton x:Name="EditQuestion" Source="edit.png"
+                                                     Padding="8"
+                                                     BackgroundColor="Transparent"
+                                                     HorizontalOptions="EndAndExpand"
+                                                     Clicked="EditQuestion_Clicked"
+                                                     VerticalOptions="CenterAndExpand" />
+                                        <ImageButton x:Name="DeleteQuestion" Source="remove.png"
+                                                     Padding="8"
+                                                     BackgroundColor="Transparent"
+                                                     HorizontalOptions="End"
+                                                     Clicked="DeleteQuestion_Clicked"
+                                                     VerticalOptions="CenterAndExpand" />
+                                    </StackLayout>
+                                    <Grid.Effects>
+                                        <controls:ViewShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Gray">
+                                        </controls:ViewShadowEffect>
+                                    </Grid.Effects>
+                                </Grid>
+                            </ContentView>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Style="{StaticResource buttonStyle}" BackgroundColor="{StaticResource dangerColor}" Text="Draft" Command="{Binding ToggleDraftedStateCommand}" CommandParameter="{Binding}" />
+                <Button Style="{StaticResource buttonStyle}" BackgroundColor="{StaticResource successColor}" Text="Publish" Command="{Binding TogglePublishStateCommand}" CommandParameter="{Binding}" />
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

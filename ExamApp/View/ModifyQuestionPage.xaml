@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ExamApp.View.Controls"
+             x:Class="ExamApp.View.ModifyQuestionPage" Title="{Binding pageTitle}">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+
+            <Label Text="Question name" />
+            <Editor FontSize="Large" Text="{Binding editableText}" AutoSize="TextChanges" />
+
+            <StackLayout Orientation="Horizontal">
+                <Button IsVisible="{Binding ModifyQuestionVisible}" Style="{StaticResource buttonStyle}" BackgroundColor="{StaticResource primaryColor}" Text="Save" Command="{Binding ModifyQuestionCommand}" CommandParameter="{Binding}" />
+                <Button Style="{StaticResource buttonStyle}" BackgroundColor="{StaticResource primaryColor}" Text="Add Answer" Command="{Binding ModifyVariantCommand}" CommandParameter="{Binding}" />
+            </StackLayout>
+
+            <ListView x:Name="VariantsList"
+                          HasUnevenRows="True"
+                          ItemsSource="{Binding variants}"
+                          IsGroupingEnabled="False"
+                          IsPullToRefreshEnabled="False"
+                          SeparatorVisibility="None"
+                          controls:Sorting.IsSortable="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+
+
+                        <ViewCell>
+                            <ContentView>
+                                <Grid Margin="6" BackgroundColor="White">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image WidthRequest="50" Margin="6" Aspect="AspectFit" HorizontalOptions="Start"
+	                        Source="answer.png" />
+                                    <StackLayout Grid.Column="1" VerticalOptions="Center" Orientation="Horizontal">
+                                        <Label Text="{Binding nameView}" FontSize="Large" FontAttributes="Bold" VerticalOptions="Center" />
+                                        <ImageButton x:Name="RightVariant" Source="{Binding icon}"
+                                                     Padding="8"
+                                                     BackgroundColor="Transparent"
+                                                     HorizontalOptions="EndAndExpand"
+                                                     Clicked="RightVariant_Clicked"
+                                                     VerticalOptions="CenterAndExpand" />
+                                        <ImageButton x:Name="EditVariant" Source="edit.png"
+                                                     Padding="8"
+                                                     BackgroundColor="Transparent"
+                                                     HorizontalOptions="End"
+                                                     Clicked="EditVariant_Clicked"
+                                                     VerticalOptions="CenterAndExpand" />
+                                        <ImageButton x:Name="DeleteQuestion" Source="remove.png"
+                                                     Padding="8"
+                                                     BackgroundColor="Transparent"
+                                                     HorizontalOptions="End"
+                                                     Clicked="DeleteQuestionVariant_Clicked"
+                                                     VerticalOptions="CenterAndExpand" />
+                                    </StackLayout>
+                                    <Grid.Effects>
+                                        <controls:ViewShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Gray">
+                                        </controls:ViewShadowEffect>
+                                    </Grid.Effects>
+                                </Grid>
+                            </ContentView>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Style="{StaticResource buttonStyle}" BackgroundColor="{StaticResource primaryColor}" Text="New Question" Command="{Binding NewQuestionCommand}" CommandParameter="{Binding}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

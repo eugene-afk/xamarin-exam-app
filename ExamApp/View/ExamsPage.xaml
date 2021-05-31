@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:ExamApp.View.Controls"
+             x:Class="ExamApp.View.ExamsPage"              
+             Title="Exams">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <ListView x:Name="examsList"
+                          HasUnevenRows="True"
+                          ItemsSource="{Binding exams}"
+                          IsGroupingEnabled="False"
+                          IsPullToRefreshEnabled="False"
+                          SeparatorVisibility="None"
+                          VerticalScrollBarVisibility="Never">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+
+                        <ViewCell>
+                            <ContentView>
+                                <Grid Margin="6" BackgroundColor="White">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image WidthRequest="50" Margin="6" Aspect="AspectFit" HorizontalOptions="Start"
+	                                       Source="exam.png" />
+                                    <Label IsVisible="{Binding isDraft}" Text="DRAFT" TextColor="{StaticResource dangerColor}" VerticalOptions="Center" FontAttributes="Bold" Rotation="-50" />
+                                    <StackLayout Grid.Column="1" VerticalOptions="Center" Orientation="Horizontal">
+                                        <Label Text="{Binding nameView}" FontSize="Large" VerticalOptions="Center" FontAttributes="Bold"/>
+                                        <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                                            <ImageButton x:Name="PlayButton"
+                                                     IsVisible="{Binding isCanPlay}"
+                                                     Source="play.png"
+                                                     Padding="8"
+                                                     BackgroundColor="Transparent"
+                                                     HorizontalOptions="EndAndExpand"
+                                                     Clicked="PlayButton_Clicked"
+                                                     VerticalOptions="CenterAndExpand" />
+                                            <ImageButton x:Name="MoreButton"
+                                                     IsVisible="{Binding isEditable}"
+                                                     Clicked="MoreButton_Clicked"
+                                                     Source="more.png"
+                                                     Padding="8"
+                                                     BackgroundColor="Transparent"
+                                                     HorizontalOptions="EndAndExpand"
+                                                     VerticalOptions="CenterAndExpand" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <Grid.Effects>
+                                        <controls:ViewShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Gray">
+                                        </controls:ViewShadowEffect>
+                                    </Grid.Effects>
+                                </Grid>
+                            </ContentView>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <StackLayout IsVisible="{Binding exams.loadMore.isLoadMoreVisible}">
+                        <Button Style="{StaticResource buttonStyle}" BackgroundColor="{StaticResource primaryColor}"
+                                Text="{Binding exams.loadMore.loadMoreText}" 
+                                Command="{Binding LoadMoreCommand}" CommandParameter="{Binding}" />
+                    </StackLayout>
+                </ListView.Footer>
+            </ListView>
+            <StackLayout Margin="0,20,0,5" Orientation="Horizontal" HorizontalOptions="Center">
+                <Button Text="Add new Exam" Command="{Binding AddNewExamCommand}" CommandParameter="{Binding}" Style="{StaticResource buttonStyle}" BackgroundColor="{StaticResource primaryColor}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

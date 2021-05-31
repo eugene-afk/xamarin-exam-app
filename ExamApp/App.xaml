@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExamApp.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            
+            <Color x:Key="primaryColor">#4285F4</Color>
+            <Color x:Key="successColor">#65BD7D</Color>
+            <Color x:Key="dangerColor">#EA4335</Color>
+
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="Margin" Value="3" />
+                <Setter Property="FontSize" Value="Large" />
+            </Style>
+            
+            <!--For some reason not working correctly, leads to blinking black bg sometimes, maybe conflict with AppCompat-->
+            <!--<Style TargetType="ContentPage" ApplyToDerivedTypes="True">
+                <Setter Property="Background" Value="#222"/>
+            </Style>-->
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:ExamApp.View.Controls"
+             x:Class="ExamApp.Common.AppMasterDetail.AppMasterDetailPageDetail"
+             Title="Exam App" Appearing="ContentPage_Appearing">
+    <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <!--<ScrollView IsEnabled="{Binding isFullStats}">-->
+            <StackLayout Padding="20">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Average Rating" FontSize="Large" />
+                    <Label FontSize="Large" Text="{Binding AVGResult, StringFormat='{0}%'}" VerticalOptions="Center" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+                <controls:BigProgressBar Margin="0,10,0,0" ProgressColor="{Binding colorPB}" Progress="{Binding AVGResultPB}" />
+                <StackLayout Orientation="Vertical" Margin="0,10,0,0" BindingContext="{Binding lastResult}">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                    </StackLayout.GestureRecognizers>
+                    <StackLayout Orientation="Horizontal">
+                        <Label FontSize="Large" Text="Last" HorizontalOptions="CenterAndExpand" />
+                    </StackLayout>
+                    <Frame>
+                        <StackLayout Orientation="Vertical">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Text="{Binding labelView}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Medium" />
+                                <Label Text="{Binding dateEND}" Grid.Row="1" VerticalOptions="CenterAndExpand" />
+                                <Label Text="{Binding percent, StringFormat='{0}%'}" Grid.Row="1" Grid.Column="1" HorizontalOptions="EndAndExpand" FontSize="Large" />
+                            </Grid>
+                            <ProgressBar ProgressColor="{Binding barColor}" Progress="{Binding percentPB}" />
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+
+                <StackLayout>
+                    <Button Style="{StaticResource buttonStyle}" BackgroundColor="{StaticResource primaryColor}"
+                    Text="{Binding moreButtonText}" 
+                    Command="{Binding showMoreCommand}" CommandParameter="{Binding}" />
+                </StackLayout>
+                <!--<ScrollView >-->
+                <StackLayout IsVisible="{Binding isFullStats}">
+                    <StackLayout Orientation="Vertical" BindingContext="{Binding bestResult}">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        </StackLayout.GestureRecognizers>
+                        <Label FontSize="Large" Text="Highest" HorizontalOptions="CenterAndExpand" />
+                        <Frame>
+                            <StackLayout Orientation="Vertical">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding labelView}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Medium" />
+                                    <Label Text="{Binding dateEND}" Grid.Row="1" VerticalOptions="CenterAndExpand" />
+                                    <Label Text="{Binding percent, StringFormat='{0}%'}" Grid.Row="1" Grid.Column="1" HorizontalOptions="EndAndExpand" FontSize="Large" />
+                                </Grid>
+                                <ProgressBar ProgressColor="{Binding barColor}" Progress="{Binding percentPB}" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" BindingContext="{Binding worstResult}">
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                        </StackLayout.GestureRecognizers>
+                        <Label FontSize="Large" Text="Lowest" HorizontalOptions="CenterAndExpand" />
+                        <Frame>
+                            <StackLayout Orientation="Vertical">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding labelView}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Medium" />
+                                    <Label Text="{Binding dateEND}" Grid.Row="1" VerticalOptions="CenterAndExpand" />
+                                    <Label Text="{Binding percent, StringFormat='{0}%'}" Grid.Row="1" Grid.Column="1" HorizontalOptions="EndAndExpand" FontSize="Large" />
+                                </Grid>
+                                <ProgressBar ProgressColor="{Binding barColor}" Progress="{Binding percentPB}" />
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+                </StackLayout>
+                <Label FontSize="Large" HorizontalOptions="CenterAndExpand" Text="Top 5" IsVisible="{Binding isFullStats}" />
+
+                <StackLayout BindableLayout.ItemsSource="{Binding topResults}"
+             Orientation="Vertical">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+
+                            <StackLayout Orientation="Vertical" Margin="0,18,0,0">
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                </StackLayout.GestureRecognizers>
+                                <Frame Margin="1">
+                                    <StackLayout Orientation="Vertical">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Label Text="{Binding labelView}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Medium" />
+                                            <Label Text="{Binding dateEND}" Grid.Row="1" VerticalOptions="CenterAndExpand" />
+                                            <Label Text="{Binding percent, StringFormat='{0}%'}" Grid.Row="1" Grid.Column="1" HorizontalOptions="EndAndExpand" FontSize="Large" />
+                                            <Grid.Effects>
+                                                <controls:ViewShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Gray">
+                                                </controls:ViewShadowEffect>
+                                            </Grid.Effects>
+                                        </Grid>
+                                        <ProgressBar ProgressColor="{Binding barColor}" Progress="{Binding percentPB}" />
+                                    </StackLayout>
+                                </Frame>
+                            </StackLayout>
+
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+                <!--<ListView x:Name="resultsList"
+                          HasUnevenRows="True"
+                          ItemsSource="{Binding topResults}"
+                          IsGroupingEnabled="False"
+                          IsPullToRefreshEnabled="False"
+                          SeparatorVisibility="None"
+                          VerticalScrollBarVisibility="Never">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ContentView>
+                                <StackLayout Orientation="Vertical" Margin="0,18,0,0">
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                    </StackLayout.GestureRecognizers>
+                                    <Frame Margin="1">
+                                        <StackLayout Orientation="Vertical">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label Text="{Binding label}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="Medium" />
+                                                <Label Text="{Binding dateEND}" Grid.Row="1" VerticalOptions="CenterAndExpand" />
+                                                <Label Text="{Binding percent, StringFormat='{0}%'}" Grid.Row="1" Grid.Column="1" HorizontalOptions="EndAndExpand" FontSize="Large" />
+                                                <Grid.Effects>
+                                                    <controls:ViewShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Gray">
+                                                    </controls:ViewShadowEffect>
+                                                </Grid.Effects>
+                                            </Grid>
+                                            <ProgressBar ProgressColor="{Binding barColor}" Progress="{Binding percentPB}" />
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+                            </ContentView>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+
+            </StackLayout>
+        </ScrollView>
+    </AbsoluteLayout>
+</ContentPage>

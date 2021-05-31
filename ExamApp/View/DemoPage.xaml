@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExamApp.View.DemoPage" Title="Demo Data">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Button x:Name="DemoBtn" Command="{Binding FillDemoCommand}"
+                Style="{StaticResource buttonStyle}"
+                BackgroundColor="{StaticResource primaryColor}"
+                Text="Fill Demo Data" />
+            <Image Source="loading.gif" IsAnimationPlaying="{Binding waiting}" IsVisible="{Binding waiting}" HeightRequest="100" />
+            <Label HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding stateMsg}" FontSize="Medium" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

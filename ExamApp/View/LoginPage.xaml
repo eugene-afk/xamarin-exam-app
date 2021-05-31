@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExamApp.View.LoginPage" Title="Exam App Login">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Padding="20" Orientation="Vertical" VerticalOptions="CenterAndExpand">
+                <Label Text="Type your name" FontSize="Large"
+                HorizontalOptions="CenterAndExpand" />
+                <Entry FontSize="Large" Text="{Binding userName}" />
+            </StackLayout>
+            <StackLayout Margin="0,0,0,20" Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="Center">
+                <Button BackgroundColor="{StaticResource successColor}" Style="{StaticResource buttonStyle}" Text="Save" Command="{Binding SaveCommand}" CommandParameter="{Binding}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

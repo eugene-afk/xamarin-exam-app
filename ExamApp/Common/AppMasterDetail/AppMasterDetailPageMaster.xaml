@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ExamApp.Common.AppMasterDetail.AppMasterDetailPageMaster"
+             Title="Master">
+  <StackLayout>
+        <ListView x:Name="MenuItemsListView"
+              SeparatorVisibility="None"
+              HasUnevenRows="true"
+              ItemsSource="{Binding MenuItems}">
+            <ListView.Header>
+                <Grid BackgroundColor="#DF3A47">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <StackLayout Grid.Column="1" Grid.Row="2" VerticalOptions="Center">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Frame CornerRadius="100" 
+                               HeightRequest="100"
+                               WidthRequest="100"
+                               HorizontalOptions="Center"
+                               Padding="0"
+                               IsClippedToBounds="True"
+                                   Grid.Row="0">
+                                <Image Source="user.png" 
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                            </Frame>
+                            <Label TextColor="#f7f7f7" FontSize="Large" Text="{Binding user}" Grid.Row="1" HorizontalOptions="Center" />
+                        </Grid>
+                    </StackLayout>
+                    <!--<Label
+              Grid.Column="1"
+              Grid.Row="2"
+              Text="AppName"
+              Style="{DynamicResource SubtitleStyle}"/>-->
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand">
+                            <Label VerticalOptions="FillAndExpand" 
+                    VerticalTextAlignment="Center" 
+                    Text="{Binding Title}" 
+                    FontSize="24"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Padding="15,10" VerticalOptions="EndAndExpand">
+            <Label Text="{Binding buildVersion}" TextColor="Black" FontSize="Micro" />
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

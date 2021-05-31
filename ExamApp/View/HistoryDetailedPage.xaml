@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:ExamApp.View.Controls"
+             x:Class="ExamApp.View.HistoryDetailedPage" Title="{Binding title}">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <ListView x:Name="resultsList"
+                          HasUnevenRows="True"
+                          ItemsSource="{Binding resultBodies}"
+                          IsGroupingEnabled="False"
+                          IsPullToRefreshEnabled="False"
+                          SeparatorVisibility="None"
+                          VerticalScrollBarVisibility="Never">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ContentView>
+                                <StackLayout Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                    </StackLayout>
+                                    <Frame Margin="6">
+                                        <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto" />
+                                                    <RowDefinition Height="*" />
+                                                </Grid.RowDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label HorizontalOptions="CenterAndExpand" Text="{Binding questionName}" Grid.Row="0" Grid.Column="0" FontSize="Large" />
+                                                <Label HorizontalOptions="CenterAndExpand" Text="{Binding chosenVariantName}" TextColor="{Binding color}" Grid.Row="1" FontSize="Medium"  />
+                                                <Grid.Effects>
+                                                    <controls:ViewShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Gray">
+                                                    </controls:ViewShadowEffect>
+                                                </Grid.Effects>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Frame>
+                                </StackLayout>
+
+                            </ContentView>
+                        </ViewCell>
+
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.Footer>
+                    <StackLayout IsVisible="{Binding resultBodies.loadMore.isLoadMoreVisible}">
+                        <Button Style="{StaticResource buttonStyle}" BackgroundColor="{StaticResource primaryColor}"
+                                Text="{Binding resultBodies.loadMore.loadMoreText}" 
+                                Command="{Binding LoadMoreCommand}" CommandParameter="{Binding}" />
+                    </StackLayout>
+                </ListView.Footer>
+            </ListView>
+            <Button Style="{StaticResource buttonStyle}" BackgroundColor="{StaticResource primaryColor}"
+                                Text="Pass again" 
+                                Command="{Binding PassAgainCommand}" CommandParameter="{Binding}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
